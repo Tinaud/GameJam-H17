@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	private float moveSpeed;
 
 	void Start () {
-		canMove = true;
+        canMove = false;
 		moveSpeed = 0.5f;
 	}
 	
