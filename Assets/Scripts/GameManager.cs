@@ -20,4 +20,13 @@ public class GameManager : MonoBehaviour {
         workingMexican++;
         Debug.Log("Mexicans on the wall : " + workingMexican);
     }
+
+    public int MexicansOnWall() {
+        return workingMexican;
+    }
+
+    public void EndGame() {
+        gameStarted = false;
+        workingMexican = 0;
+    }
 }
