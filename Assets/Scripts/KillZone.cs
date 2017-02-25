@@ -13,8 +13,11 @@ public class KillZone : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Mexican") {
             Destroy(other.gameObject);
-            /*if (gm.IsGameStarted())
-                gm.AddMexicanOnWall();*/
+            if (gm.IsGameStarted())
+                gm.AddMexicanFree();
+
+            if (gm.MexicansFree() > 20)
+                gm.EndGame(true);
         }
     }
 }

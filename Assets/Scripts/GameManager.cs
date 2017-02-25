@@ -6,17 +6,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     private bool gameStarted;
-    private int workingMexican,
+    private int freeMexicans,
+                workingMexicans,
                 selectedSoldier;
     public List<GameObject> armyGuyList = new List<GameObject>();
 
     void Awake() {
         gameStarted = true;
-        workingMexican = 0;
+        freeMexicans = 0;
+        workingMexicans = 0;
         selectedSoldier = 0;
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             GameObject armyGuy = (GameObject)Instantiate(Resources.Load("ArmyGuy"), new Vector3(Random.Range(-5.0f, 15.0f), Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
+            int type = Random.Range(0, 3);
+            armyGuy.GetComponent<PlayerController>().armyType = type;
+            armyGuy.GetComponent<ArmyGuy>().armyType = type;
             armyGuy.GetComponent<PlayerController>().enabled = false;
             armyGuyList.Add(armyGuy);
         }
@@ -27,21 +32,28 @@ public class GameManager : MonoBehaviour {
     }
 
     public void AddMexicanOnWall() {
-        workingMexican++;
-        Debug.Log("Mexicans on the wall : " + workingMexican);
+        workingMexicans++;
+    }
+
+    public void AddMexicanFree() {
+        freeMexicans++;
     }
 
     public int MexicansOnWall() {
-        return workingMexican;
+        return workingMexicans;
     }
 
-    public void EndGame() {
-        gameStarted = false;
-        workingMexican = 0;
+    public int MexicansFree() {
+        return freeMexicans;
+    }
 
-        //Change la scene dépendamment des points yo
-        //SceneManager.LoadScene("EndGameGood");
-        //SceneManager.LoadScene("EndGameBad");
+    public void EndGame(bool goodEnding) {
+        gameStarted = false;
+
+        if(goodEnding)
+            SceneManager.LoadScene("EndGameGood");
+        else
+            SceneManager.LoadScene("EndGameBad");
     }
 
     public void ChangeSelectedSoldier(int i) {

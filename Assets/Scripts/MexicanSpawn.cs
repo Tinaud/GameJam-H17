@@ -30,8 +30,8 @@ public class MexicanSpawn : MonoBehaviour {
 
     IEnumerator Spawn() {
         while(gm.IsGameStarted()) {
-            yield return new WaitForSeconds(1f);
-            GameObject mexican = (GameObject)Instantiate(Resources.Load(RandomMexicanGenerator()), RandomSpawnPos(), Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(0.5f, 1.0f));
+            Instantiate(Resources.Load(RandomMexicanGenerator()), RandomSpawnPos(), Quaternion.identity);
         }
     }
 }

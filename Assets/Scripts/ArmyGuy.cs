@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArmyGuy : MonoBehaviour {
 
+    public int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
     private enum States { wander, follow, action }
     private float moveSpeed,
                   angle;
@@ -21,7 +22,9 @@ public class ArmyGuy : MonoBehaviour {
         switch(actualState) {
             case States.follow:
                 if (closeMexican != null) {
-                    transform.Translate(Seek(closeMexican.transform.position) * moveSpeed * Time.deltaTime);
+                    direction = Seek(closeMexican.transform.position);
+                    transform.Translate(direction * moveSpeed * Time.deltaTime);
+                    Flip(direction);
 
                     float dist = DistSquare(transform.position, closeMexican.transform.position);
 
@@ -29,7 +32,7 @@ public class ArmyGuy : MonoBehaviour {
                         moveSpeed -= 0.1f;
                         actualState = States.wander;
                     }
-                    else if (dist < 10) {
+                    else if (dist < 5) {
                         moveSpeed -= 0.1f;
                         actualState = States.action;
                     }
@@ -39,24 +42,40 @@ public class ArmyGuy : MonoBehaviour {
                 
                 break;
             case States.action:
-                Destroy(closeMexican);
+                if(closeMexican != null)
+                    switch (armyType) {
+                        case 1:
+                            Destroy(closeMexican.gameObject);
+                            break;
+                        case 2:
+                            StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
+                            break;
+                        default:
+                            Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                            Destroy(closeMexican.gameObject);
+                            break;
+                    }
                 actualState = States.wander;
                 break;
             default:
-                transform.Translate(Wander() * moveSpeed * Time.deltaTime);
+                direction = Wander();
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
+                Flip(direction);
                 break;
         }
     }
 
     Vector2 Wander() {
+        Vector2 newDirection;
+
         angle += Random.Range(-0.2f, 0.2f);
 
         Clamp(angle, 0.0f, 6.2f);
 
-        direction.x = Mathf.Cos(angle);
-        direction.y = Mathf.Sin(angle);
+        newDirection.x = Mathf.Cos(angle);
+        newDirection.y = Mathf.Sin(angle);
 
-        return new Vector2(direction.x, direction.y).normalized;
+        return new Vector2(newDirection.x, newDirection.y).normalized;
     }
 
     Vector2 Seek(Vector2 pos) {
@@ -73,6 +92,13 @@ public class ArmyGuy : MonoBehaviour {
         else if (i > max)
             i -= max;
         return i;
+    }
+
+    void Flip(Vector2 dir) {
+        if (dir.x < 0)
+            GetComponent<SpriteRenderer>().flipX = true;
+        else
+            GetComponent<SpriteRenderer>().flipX = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

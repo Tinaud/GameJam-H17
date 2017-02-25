@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private Vector3 moveDirection = Vector3.zero;
-
-    private int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
+    public int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
     private float moveSpeed, horizontalSpeed, verticalSpeed;
     private bool action, mexicanTrigger;
     private GameObject closeMexican;
@@ -14,7 +12,6 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         moveSpeed = 5f;
-        armyType = Random.Range(0, 3);
 	}
 
     // Update is called once per frame
@@ -23,8 +20,15 @@ public class PlayerController : MonoBehaviour {
         horizontalSpeed = Input.GetAxis("Horizontal");
         verticalSpeed = Input.GetAxis("Vertical");
 
-        if (Mathf.Abs(horizontalSpeed) > 0.05f)
+        if (Mathf.Abs(horizontalSpeed) > 0.05f) {
             transform.Translate(Vector3.right * horizontalSpeed * moveSpeed * Time.deltaTime);
+
+            if (horizontalSpeed < 0)
+                GetComponent<SpriteRenderer>().flipX = true;
+            else
+                GetComponent<SpriteRenderer>().flipX = false;
+        }
+            
 
         if (Mathf.Abs(verticalSpeed) > 0.05)
             transform.Translate(Vector3.up * verticalSpeed * moveSpeed * Time.deltaTime);

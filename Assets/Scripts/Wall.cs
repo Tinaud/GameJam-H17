@@ -13,6 +13,6 @@ public class Wall : MonoBehaviour {
         transform.localScale += new Vector3(0, gm.MexicansOnWall() * 0.0005f, 0);
 
         if (transform.localScale.y >= 20)
-            gm.EndGame();
+            gm.EndGame(false);
 	}
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Mexican : MonoBehaviour {
 
     private enum States { run, shoot, flee };
-    private float moveSpeed,
-                  wallHeight;
-    public GameObject objectiveLocation;
+    private float wallHeight;
+    public float moveSpeed;
+    private GameObject objectiveLocation;
     private States actualState;
-    private List<GameObject> closeEnemies = new List<GameObject>();
+    public List<GameObject> closeEnemies = new List<GameObject>();
     private bool tryAvoidWall;
 
 	void Start () {
@@ -47,9 +47,11 @@ public class Mexican : MonoBehaviour {
         Vector2 fleeDirection = Vector2.zero;
 
         foreach(GameObject g in closeEnemies) {
-            Transform a = g.transform;
-            Transform m = transform;
-            fleeDirection -= new Vector2(a.position.x - m.position.x, a.position.y - m.position.y);
+            if(g != null) {
+                Transform a = g.transform;
+                Transform m = transform;
+                fleeDirection -= new Vector2(a.position.x - m.position.x, a.position.y - m.position.y);
+            }
         }
 
         return fleeDirection.normalized;
@@ -57,16 +59,6 @@ public class Mexican : MonoBehaviour {
 
     Vector2 WallAvoidance() {
         return new Vector2(0, wallHeight);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "ArmyGuy")
-            closeEnemies.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.tag == "ArmyGuy")
-            closeEnemies.Remove(other.gameObject);
     }
 
     public void WallClose(Transform t) {
