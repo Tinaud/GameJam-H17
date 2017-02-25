@@ -9,7 +9,7 @@ public class TweetScripter : MonoBehaviour {
     public float afterTweetWait;
     private string tweet;
     private int subject;
-    public GUIText tweetText;
+    public TextMesh tweetText;
     public GameObject tweetWindow;
 
     private string[] tweetQuotes = new string[100];
