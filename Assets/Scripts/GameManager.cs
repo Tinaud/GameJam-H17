@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     private bool gameStarted;
     private int workingMexican;
+    private List<GameObject> mexican_list;
 
 	void Awake () {
         gameStarted = true;
