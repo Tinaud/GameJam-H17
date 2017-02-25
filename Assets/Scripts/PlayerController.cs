@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour {
             switch (armyType)
             {
                 case 0:
-                    //Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                    Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
                     break;
                 case 1:
                     //Shot mexican
@@ -55,9 +55,21 @@ public class PlayerController : MonoBehaviour {
                     //Stun Mexican
                     break;
                 default:
-                    //Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                    Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
                     break;
             }
+        }
+
+        //Changement de soldat à gauche
+        if(Input.GetKeyDown(KeyCode.JoystickButton4))
+        {
+            //Change left function
+        }
+
+        //Changement de soldat à droite
+        if(Input.GetKeyDown(KeyCode.JoystickButton5))
+        {
+            //Change right function
         }
     }
 
