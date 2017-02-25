@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	private bool canMove;
-	private float moveSpeed;
+    private bool gameStarted;
+    private int workingMexican;
 
-	void Start () {
-        canMove = false;
-		moveSpeed = 0.5f;
+	void Awake () {
+        gameStarted = true;
+        workingMexican = 0;
 	}
-	
-	void Update () {
-		if(canMove)
-			transform.Translate(Vector3.up *  moveSpeed * Time.deltaTime);
 
-		if(Input.GetKeyDown("space"))
-			canMove = !canMove;
-	}
+    public bool IsGameStarted() {
+        return gameStarted;
+    }
+
+    public void AddMexicanOnWall() {
+        workingMexican++;
+        Debug.Log("Mexicans on the wall : " + workingMexican);
+    }
 }
