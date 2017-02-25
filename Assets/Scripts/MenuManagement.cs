@@ -10,13 +10,11 @@ public class MenuManagement: MonoBehaviour {
     private int freeMexicans,
                 workingMexicans,
                 selectedSoldier;
-    private MenuManagement gm;
     public List<GameObject> armyGuyList = new List<GameObject>();
     private GameObject _Options, _Menu, _Credits, _Mexican;
 
     private void Start()
     {
-        gm = Camera.main.GetComponent<MenuManagement>();
         StartCoroutine(Spawn());
 
         freeMexicans = 0;
@@ -73,37 +71,12 @@ public class MenuManagement: MonoBehaviour {
         Application.Quit();
     }
 
-    public void EndGame(bool goodEnding)
-    {
-        
-    }
-
-    public void ChangeSelectedSoldier(int i)
-    {
-        armyGuyList[selectedSoldier].GetComponent<PlayerController>().enabled = false;
-        armyGuyList[selectedSoldier].GetComponent<ArmyGuy>().enabled = true;
-
-        selectedSoldier += i;
-
-        if (selectedSoldier < 0)
-            selectedSoldier = armyGuyList.Count - 1;
-        else if (selectedSoldier > armyGuyList.Count - 1)
-            selectedSoldier = 0;
-
-        armyGuyList[selectedSoldier].GetComponent<PlayerController>().enabled = true;
-        armyGuyList[selectedSoldier].GetComponent<ArmyGuy>().enabled = false;
-        transform.position = armyGuyList[selectedSoldier].transform.position + new Vector3(0, 0, -10);
-        transform.parent = armyGuyList[selectedSoldier].transform;
-    }
-
-
     IEnumerator Spawn()
     {
         while (true)
         {
-            _Mexican = (GameObject)Instantiate(Resources.Load("Mexican1"), new Vector3(-5,1,0), Quaternion.identity);
-            yield return new WaitForSeconds(4.0f);
-            Destroy(_Mexican);
+            Instantiate(Resources.Load("MexicanMenu 1"), new Vector3(-12,Random.Range(-10.0f, 10.0f),0), Quaternion.identity);
+                yield return new WaitForSeconds(1.0f);
         }
     }
 }
