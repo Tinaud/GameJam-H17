@@ -28,7 +28,7 @@ public class Mexican : MonoBehaviour {
 
         switch (actualState) {
             case States.run:
-                direction = (2 * Seek(objectiveLocation.transform.position)) + (4 * Flee());
+                direction = 3 * Seek(objectiveLocation.transform.position) + Flee();
 
                 if (tryAvoidWall)
                     direction += (WallAvoidance());

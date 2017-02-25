@@ -61,15 +61,13 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Changement de soldat à gauche
-        if(Input.GetKeyDown(KeyCode.JoystickButton4))
-        {
-            //Change left function
+        if(Input.GetKeyDown(KeyCode.JoystickButton4)) {
+            Camera.main.GetComponent<GameManager>().ChangeSelectedSoldier(-1);
         }
 
         //Changement de soldat à droite
-        if(Input.GetKeyDown(KeyCode.JoystickButton5))
-        {
-            //Change right function
+        if(Input.GetKeyDown(KeyCode.JoystickButton5)) {
+            Camera.main.GetComponent<GameManager>().ChangeSelectedSoldier(1);
         }
     }
 
