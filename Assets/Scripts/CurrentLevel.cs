@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CurrentLevel : MonoBehaviour {
 
-    GameObject _CurrentLevel;
+    private GameObject _CurrentLevel;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +14,7 @@ public class CurrentLevel : MonoBehaviour {
 	
 	public void Easy()
     {
+        
         GetComponent<Text>().text = "Easy";
     }
 
