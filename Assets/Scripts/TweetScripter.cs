@@ -55,6 +55,7 @@ public class TweetScripter : MonoBehaviour {
                 tweetText.text = tweet;
                 yield return new WaitForSeconds(afterTweetWait);
                 tweetWindow.SetActive(false);
+                tweetText.text = "";
             }
         }
     }
@@ -69,8 +70,9 @@ public class TweetScripter : MonoBehaviour {
 
         tweet = "";
         subject = 0;
-        StartCoroutine(SpawnTweet());
         tweetWindow.SetActive(false);
+        tweetText.text = tweet;
+        StartCoroutine(SpawnTweet());
 
         tweetQuotes[10] = "Make America great again!";
         tweetQuotes[11] = "Big interview tonight at Fox News";
@@ -85,11 +87,11 @@ public class TweetScripter : MonoBehaviour {
 
         tweetQuotes[30] = "Illegal immigrants are stealing our jobs! We need more men \nto build that wall.";
         tweetQuotes[31] = "The problem with mexican men is that they don't know how \nto make tacos.";
-        tweetQuotes[32] = "We are going to intercept every mexican male and send them\n back to their dumb country!";
+        tweetQuotes[32] = "We are going to intercept every mexican male and send them\nback to their dumb country!";
         tweetQuotes[33] = "''Mexicans are Trump's ennemies'', FAKE NEWS! They are \nAMERICA'S ennemies!";
 
         tweetQuotes[40] = "The U.S. military are doing a great job at the mexican border!";
-        tweetQuotes[41] = "We are intercepting a lot of mexican illegal immigrants";
+        tweetQuotes[41] = "We are intercepting a lot of illegal mexican immigrants";
         tweetQuotes[42] = "The wall is getting bigger!";
         tweetQuotes[43] = "100 000 000 $ military budget as been established for \nthe mexican border";
 
