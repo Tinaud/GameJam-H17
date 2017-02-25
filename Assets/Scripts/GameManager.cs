@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -37,6 +38,10 @@ public class GameManager : MonoBehaviour {
     public void EndGame() {
         gameStarted = false;
         workingMexican = 0;
+
+        //Change la scene dépendamment des points yo
+        //SceneManager.LoadScene("EndGameGood");
+        //SceneManager.LoadScene("EndGameBad");
     }
 
     public void ChangeSelectedSoldier(int i) {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Options : MonoBehaviour {
+public class ReturnFromBadEnding : MonoBehaviour {
 
-    public void Back()
+	public void Back()
     {
         SceneManager.LoadScene("Main Menu");
     }
