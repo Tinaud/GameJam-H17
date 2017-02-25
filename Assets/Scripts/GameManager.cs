@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
         workingMexicans = 0;
         selectedSoldier = 0;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             GameObject armyGuy = (GameObject)Instantiate(Resources.Load("ArmyGuy"), new Vector3(Random.Range(-5.0f, 15.0f), Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
             int type = Random.Range(0, 3);
             armyGuy.GetComponent<PlayerController>().armyType = type;
