@@ -47,4 +47,9 @@ public class MenuManagement: MonoBehaviour {
     {
         SceneManager.LoadScene("SceneMathieu");
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
