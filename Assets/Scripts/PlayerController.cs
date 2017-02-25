@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour {
     private int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
     private float moveSpeed, horizontalSpeed, verticalSpeed;
     private bool action, mexicanTrigger;
+    private GameObject closeMexican;
 
     // Use this for initialization
     void Start () {
         moveSpeed = 5f;
+        armyType = Random.Range(0, 3);
 	}
 
     // Update is called once per frame
@@ -21,41 +23,23 @@ public class PlayerController : MonoBehaviour {
         horizontalSpeed = Input.GetAxis("Horizontal");
         verticalSpeed = Input.GetAxis("Vertical");
 
-        if (horizontalSpeed > 0)
-        {
+        if (Mathf.Abs(horizontalSpeed) > 0.05f)
             transform.Translate(Vector3.right * horizontalSpeed * moveSpeed * Time.deltaTime);
-        }
 
-        if (horizontalSpeed < 0)
-        {
-            transform.Translate(Vector3.left * -horizontalSpeed * moveSpeed * Time.deltaTime);
-        }
-
-        if (verticalSpeed > 0)
-        {
+        if (Mathf.Abs(verticalSpeed) > 0.05)
             transform.Translate(Vector3.up * verticalSpeed * moveSpeed * Time.deltaTime);
-        }
 
-        if (verticalSpeed < 0)
-        {
-            transform.Translate(Vector3.down * -verticalSpeed * moveSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) && mexicanTrigger == true)
-        {
-            switch (armyType)
-            {
-                case 0:
-                    Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
-                    break;
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && closeMexican != null) {
+            switch (armyType) {
                 case 1:
-                    //Shot mexican
+                    Destroy(closeMexican.gameObject);
                     break;
                 case 2:
-                    //Stun Mexican
+                    StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
                     break;
                 default:
                     Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                    Destroy(closeMexican.gameObject);
                     break;
             }
         }
@@ -71,11 +55,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-        private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Mexican")
         {
-            mexicanTrigger = true;
+            closeMexican = other.gameObject;
         }
     }
 
@@ -83,7 +67,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.tag == "Mexican")
         {
-            mexicanTrigger = false;
+            closeMexican = null;
         }
     }
 }

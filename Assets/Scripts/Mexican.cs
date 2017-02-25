@@ -28,7 +28,7 @@ public class Mexican : MonoBehaviour {
 
         switch (actualState) {
             case States.run:
-                direction = 3 * Seek(objectiveLocation.transform.position) + Flee();
+                direction = 2 * Seek(objectiveLocation.transform.position) + Flee();
 
                 if (tryAvoidWall)
                     direction += (WallAvoidance());
@@ -72,5 +72,12 @@ public class Mexican : MonoBehaviour {
     public void WallClose(Transform t) {
         tryAvoidWall = !tryAvoidWall;
         wallHeight = t.localScale.y + 5;
+    }
+
+    public IEnumerator Stun() {
+        float temp = moveSpeed;
+        moveSpeed = 0;
+        yield return new WaitForSeconds(2f);
+        moveSpeed = temp;
     }
 }
