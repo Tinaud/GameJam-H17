@@ -6,23 +6,22 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 moveDirection = Vector3.zero;
 
-    public float moveSpeed;
-    private float horizontalSpeed, verticalSpeed;
-    private bool action;
+    private int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
+    private float moveSpeed, horizontalSpeed, verticalSpeed;
+    private bool action, mexicanTrigger;
 
     // Use this for initialization
     void Start () {
-		
+        moveSpeed = 5f;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
 
         horizontalSpeed = Input.GetAxis("Horizontal");
         verticalSpeed = Input.GetAxis("Vertical");
-        //action = Input.GetKeyDown("JoystickButton1");
 
-        if(horizontalSpeed > 0)
+        if (horizontalSpeed > 0)
         {
             transform.Translate(Vector3.right * horizontalSpeed * moveSpeed * Time.deltaTime);
         }
@@ -41,5 +40,41 @@ public class PlayerController : MonoBehaviour {
         {
             transform.Translate(Vector3.down * -verticalSpeed * moveSpeed * Time.deltaTime);
         }
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && mexicanTrigger == true)
+        {
+            switch (armyType)
+            {
+                case 0:
+                    //Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                    break;
+                case 1:
+                    //Shot mexican
+                    break;
+                case 2:
+                    //Stun Mexican
+                    break;
+                default:
+                    //Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                    break;
+            }
+        }
+    }
+
+        private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Mexican")
+        {
+            mexicanTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Mexican")
+        {
+            mexicanTrigger = false;
+        }
     }
 }
+
