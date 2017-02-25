@@ -28,10 +28,15 @@ public class PlayerController : MonoBehaviour {
             else
                 GetComponent<SpriteRenderer>().flipX = false;
         }
-            
 
         if (Mathf.Abs(verticalSpeed) > 0.05)
             transform.Translate(Vector3.up * verticalSpeed * moveSpeed * Time.deltaTime);
+
+
+        /*if (Mathf.Abs(verticalSpeed) < 0.05 && Mathf.Abs(horizontalSpeed) < 0.05f)
+            GetComponent<Animator>().SetBool("isIdle", true);
+        else
+            GetComponent<Animator>().SetBool("isIdle", false);*/
 
         if (Input.GetKeyDown(KeyCode.JoystickButton0) && closeMexican != null) {
             switch (armyType) {
