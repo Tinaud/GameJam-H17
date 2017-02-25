@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour {
 
-    public float speed, horizontalSpeed;
+    public float speed;
     private Vector2 dir;
     private float angle;
 
@@ -13,8 +13,8 @@ public class Mover : MonoBehaviour {
         angle += Random.Range(0,360);
         //dir.x = Mathf.Cos(angle);
         //dir.y = Mathf.Sin(angle);
-        dir.x = 0;
-        dir.y = -1;
+        dir.x = -1;
+        dir.y = 0;
     }
 
     void Update()
