@@ -9,8 +9,7 @@ public class TweetScripter : MonoBehaviour {
     public float afterTweetWait;
     private string tweet;
     private int subject;
-    public TextMesh tweetText;
-    public GameObject tweetWindow;
+    private GameObject tweetWindow;
 
     private string[] tweetQuotes = new string[100];
 
@@ -52,10 +51,10 @@ public class TweetScripter : MonoBehaviour {
                         break;
                 }
 
-                tweetText.text = tweet;
+                tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
                 yield return new WaitForSeconds(afterTweetWait);
                 tweetWindow.SetActive(false);
-                tweetText.text = "";
+                tweetWindow.GetComponentInChildren<TextMesh>().text = "";
             }
         }
     }
@@ -68,10 +67,11 @@ public class TweetScripter : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        tweetWindow = Instantiate(Resources.Load("TweetBackground", typeof(GameObject))) as GameObject;
         tweet = "";
         subject = 0;
         tweetWindow.SetActive(false);
-        tweetText.text = tweet;
+        tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
         StartCoroutine(SpawnTweet());
 
         tweetQuotes[10] = "Make America great again!";
