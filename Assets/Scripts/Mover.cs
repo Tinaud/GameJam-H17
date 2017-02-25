@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour {
 
-    public float speed;
+    public float speed, horizontalSpeed;
+    private Vector2 dir;
+    private float angle;
 
     void Start ()
     {
-
+        angle += Random.Range(0,360);
+        dir.x = Mathf.Cos(angle);
+        dir.y = Mathf.Sin(angle);
     }
 
     void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+       transform.Translate(dir * speed * Time.deltaTime);
     }
 	
 }
