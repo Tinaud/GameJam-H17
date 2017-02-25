@@ -95,9 +95,8 @@ public class TweetScripter : MonoBehaviour {
         tweetQuotes[42] = "The wall is getting bigger!";
         tweetQuotes[43] = "100 000 000 $ military budget as been established for \nthe mexican border";
 
-        tweetQuotes[50] = "The General of 'the operation illegal immegrant' is an incapable";
+        tweetQuotes[50] = "The General of 'the operation illegal immigrant' is an incapable";
         tweetQuotes[51] = "Come on troups! get rid of those mexicans!";
         tweetQuotes[52] = "My grandmother could be more efficient than the custom officers";
-
     }
 }
