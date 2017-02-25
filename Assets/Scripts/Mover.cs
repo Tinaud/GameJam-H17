@@ -11,8 +11,10 @@ public class Mover : MonoBehaviour {
     void Start ()
     {
         angle += Random.Range(0,360);
-        dir.x = Mathf.Cos(angle);
-        dir.y = Mathf.Sin(angle);
+        //dir.x = Mathf.Cos(angle);
+        //dir.y = Mathf.Sin(angle);
+        dir.x = 0;
+        dir.y = -1;
     }
 
     void Update()
