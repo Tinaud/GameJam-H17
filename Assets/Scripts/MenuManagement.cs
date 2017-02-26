@@ -8,7 +8,7 @@ public class MenuManagement: MonoBehaviour {
 
     private bool gameStarted;
     public List<GameObject> armyGuyList = new List<GameObject>();
-    private GameObject _Options, _Menu, _Credits, _Mexican, _Tutorial;
+    private GameObject _Options, _Menu, _Credits, _Mexican, _Tutorial, _Buttons;
 
     private void Start()
     {
@@ -23,11 +23,13 @@ public class MenuManagement: MonoBehaviour {
             armyGuy.GetComponent<PlayerController>().enabled = false;
             armyGuyList.Add(armyGuy);
 
+            _Buttons = GameObject.Find("Buttons");
             _Options = GameObject.Find("Options");
             _Menu = GameObject.Find("Menu");
             _Credits = GameObject.Find("Credits");
             _Tutorial = GameObject.Find("Tutorial");
 
+            _Buttons.SetActive(false);
             _Options.SetActive(false);
             _Menu.SetActive(true);
             _Credits.SetActive(false);
@@ -37,6 +39,7 @@ public class MenuManagement: MonoBehaviour {
 
     public void Back()
     {
+        _Buttons.SetActive(false);
         _Options.SetActive(false);
         _Menu.SetActive(true);
         _Credits.SetActive(false);
@@ -45,6 +48,7 @@ public class MenuManagement: MonoBehaviour {
 
     public void Options()
     {
+        _Buttons.SetActive(false);
         _Options.SetActive(true);
         _Menu.SetActive(false);
         _Credits.SetActive(false);
@@ -53,6 +57,7 @@ public class MenuManagement: MonoBehaviour {
 
     public void Credits()
     {
+        _Buttons.SetActive(false);
         _Options.SetActive(false);
         _Menu.SetActive(false);
         _Credits.SetActive(true);
@@ -61,6 +66,7 @@ public class MenuManagement: MonoBehaviour {
 
     public void Tutorial()
     {
+        _Buttons.SetActive(true);
         _Options.SetActive(false);
         _Menu.SetActive(false);
         _Credits.SetActive(false);
