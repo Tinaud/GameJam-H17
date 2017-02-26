@@ -14,8 +14,8 @@ public class KillerMexican : Mexican {
     }
 
     IEnumerator Shoot() {
-        float temp = moveSpeed;
-        moveSpeed = 0;
+        float temp = GetSpeed();
+        SetSpeed(0);
         GetComponent<Animator>().SetBool("isShooting", true);
         
         for(int i = 0; i < 3; i++) {
@@ -23,7 +23,7 @@ public class KillerMexican : Mexican {
             yield return new WaitForSeconds(0.5f);
         }
 
-        moveSpeed = temp;
+        SetSpeed(temp);
 
         GetComponent<Animator>().SetBool("isShooting", false);
     }

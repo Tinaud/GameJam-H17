@@ -5,7 +5,7 @@ using UnityEngine;
 public class Mexican : MonoBehaviour {
 
     private float wallHeight;
-    public float moveSpeed;
+    private float moveSpeed;
     private GameObject objectiveLocation;
     public List<GameObject> closeEnemies = new List<GameObject>();
     private bool tryAvoidWall;
@@ -51,6 +51,14 @@ public class Mexican : MonoBehaviour {
 
     Vector2 WallAvoidance() {
         return new Vector2(0, wallHeight);
+    }
+
+    public float GetSpeed() {
+        return moveSpeed;
+    }
+
+    public void SetSpeed(float s) {
+        moveSpeed = s;
     }
 
     public void WallClose(Transform t) {

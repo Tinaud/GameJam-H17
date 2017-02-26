@@ -108,8 +108,7 @@ public class ArmyGuy : MonoBehaviour {
         else {
             GetComponent<SpriteRenderer>().flipX = false;
             lookDirection = 1;
-        }
-            
+        }    
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
