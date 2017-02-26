@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class TweetScripter : MonoBehaviour {
 
-    public int frequencyTweet;
-    public float startTweetWait;
-    public float afterTweetWait;
     private string tweet;
     private int subject;
     private GameObject tweetWindow;
-
     private string[] tweetQuotes = new string[100];
 
     IEnumerator SpawnTweet()
     {
-        yield return new WaitForSeconds(startTweetWait);
+        yield return new WaitForSeconds(3);
 
         while (Camera.main.GetComponent<GameManager>().IsGameStarted())
         {
-            yield return new WaitForSeconds(frequencyTweet);
+            yield return new WaitForSeconds(1);
             if(Random.Range(0,10) == 3)
             {
                 tweetWindow.SetActive(true);
@@ -52,7 +48,7 @@ public class TweetScripter : MonoBehaviour {
                 }
 
                 tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
-                yield return new WaitForSeconds(afterTweetWait);
+                yield return new WaitForSeconds(15);
                 tweetWindow.SetActive(false);
                 tweetWindow.GetComponentInChildren<TextMesh>().text = "";
             }
