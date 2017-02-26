@@ -15,8 +15,8 @@ public class TweetScripter : MonoBehaviour {
     void PlaySound(int i)
     {
         //Assign random sound from variable
-        GetComponent<AudioSource>().clip = otherClip[i];
-        GetComponent<AudioSource>().Play();
+        /*GetComponent<AudioSource>().clip = otherClip[i];
+        GetComponent<AudioSource>().Play();*/
     }
 
     IEnumerator SpawnTweet()
