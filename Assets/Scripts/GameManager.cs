@@ -18,8 +18,24 @@ public class GameManager : MonoBehaviour {
         selectedSoldier = 0;
 
         for (int i = 0; i < 5; i++) {
-            GameObject armyGuy = (GameObject)Instantiate(Resources.Load("ArmyGuy"), new Vector3(Random.Range(-5.0f, 15.0f), Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
             int type = Random.Range(0, 3);
+            string toSpawn;
+
+            switch(type) {
+                case 1:
+                    toSpawn = "ArmyGuyShoot";
+                    break;
+                case 2:
+                    toSpawn = "ArmyShield";
+                    break;
+                default:
+                    toSpawn = "ArmyGuy";
+                    break;
+            }
+
+
+            GameObject armyGuy = (GameObject)Instantiate(Resources.Load(toSpawn), new Vector3(Random.Range(-5.0f, 15.0f), Random.Range(-15.0f, 15.0f), 0), Quaternion.identity);
+            
             armyGuy.GetComponent<PlayerController>().armyType = type;
             armyGuy.GetComponent<ArmyGuy>().armyType = type;
             armyGuy.GetComponent<PlayerController>().enabled = false;

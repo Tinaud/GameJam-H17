@@ -11,11 +11,13 @@ public class ArmyGuy : MonoBehaviour {
     private Vector2 direction;
     private States actualState;
     private GameObject closeMexican;
+    private int lookDirection;
 
     void Start () {
         actualState = States.wander;
         moveSpeed = 5.0f;
         angle = Random.Range(0.0f, 360.0f);
+        lookDirection = 1;
     }
 	
 	void Update () {
@@ -45,14 +47,17 @@ public class ArmyGuy : MonoBehaviour {
                 if(closeMexican != null)
                     switch (armyType) {
                         case 1:
-                            Destroy(closeMexican.gameObject);
+                            StartCoroutine(Shoot());
                             break;
                         case 2:
+                            GetComponent<Animator>().SetBool("isGrabbing", true);
                             StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
                             break;
                         default:
+                            GetComponent<Animator>().SetBool("isGrabbing", true);
                             Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
                             Destroy(closeMexican.gameObject);
+                            GetComponent<Animator>().SetBool("isGrabbing", false);
                             break;
                     }
                 actualState = States.wander;
@@ -95,10 +100,18 @@ public class ArmyGuy : MonoBehaviour {
     }
 
     void Flip(Vector2 dir) {
-        if (dir.x < 0)
+        if (dir.x < 0) {
             GetComponent<SpriteRenderer>().flipX = true;
-        else
+            transform.localScale = new Vector3(-1.5f, 1.5f, 0);
+            lookDirection = -1;
+        }
+            
+        else {
             GetComponent<SpriteRenderer>().flipX = false;
+            transform.localScale = new Vector3(1.5f, 1.5f, 0);
+            lookDirection = 1;
+        }
+            
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -112,5 +125,33 @@ public class ArmyGuy : MonoBehaviour {
             moveSpeed += 0.1f;
             closeMexican = other.gameObject;
         }
+    }
+
+    IEnumerator Shoot() {
+        float temp = moveSpeed;
+        moveSpeed = 0;
+        GetComponent<Animator>().SetBool("isShooting", true);
+        yield return new WaitForSeconds(Random.Range(0.3f, 0.5f));
+
+        for (int i = 0; i < 3; i++) {
+            GameObject b = (GameObject)Instantiate(Resources.Load("Bullet"), transform.position + new Vector3(0.5f, -0.1f, 0), Quaternion.identity);
+            b.GetComponent<BulletCollider>().SetDirection(lookDirection);
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        moveSpeed = temp;
+
+        GetComponent<Animator>().SetBool("isShooting", false);
+    }
+
+    IEnumerator Hit() {
+        float temp = moveSpeed;
+        moveSpeed = 0;
+        GetComponent<Animator>().SetBool("isHitting", true);
+        yield return new WaitForSeconds(0.3f);
+
+        moveSpeed = temp;
+
+        GetComponent<Animator>().SetBool("isHitting", false);
     }
 }
