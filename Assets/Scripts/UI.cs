@@ -28,11 +28,11 @@ public class UI : MonoBehaviour {
         
         if(Pourcentage(wScale) >= 100.0f)
         {
-            wallBuilt.GetComponent<Text>().text = "Wall built: 100%";
+            wallBuilt.GetComponent<Text>().text = "100%";
         }
         else
         {
-            wallBuilt.GetComponent<Text>().text = "Wall built:" + Pourcentage(wScale).ToString() + "%";
+            wallBuilt.GetComponent<Text>().text = Pourcentage(wScale).ToString() + "%";
         }
 	}
 
