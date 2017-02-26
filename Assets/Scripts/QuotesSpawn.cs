@@ -24,7 +24,7 @@ public class QuotesSpawn : MonoBehaviour
         quoteList[4] = "For the \nUnited States!";
 
         quoteList[10] = "  Save \nmy tacos!";
-        quoteList[11] = "  I have \nchildrens!";
+        quoteList[11] = "  I have \nchildren!";
         quoteList[12] = " I need \na job!";
         quoteList[13] = "  I want \nto go to \nTaco Bell!";
         quoteList[14] = "  I walked \nfor hours!";
@@ -42,13 +42,15 @@ public class QuotesSpawn : MonoBehaviour
             if (Random.Range(0, 5) == 3)
             {
                 bubbleWindow.SetActive(true);
-                int quote;
-                if (gameObject.CompareTag("ArmyGuy"))
+                int quote =-1;
+                if (gameObject.CompareTag("ArmyGuy") || gameObject.CompareTag("Player"))
                     quote = Random.Range(0, 4);
                 else
-                    quote = Random.Range(10, 15);
+                    if(gameObject.CompareTag("Mexican"))
+                        quote = Random.Range(10, 15);
 
-                GetComponentInChildren<TextMesh>().text = quoteList[quote];
+                if(quote!=-1)
+                    GetComponentInChildren<TextMesh>().text = quoteList[quote];
                 yield return new WaitForSeconds(4);
             }
             bubbleWindow.SetActive(false);
