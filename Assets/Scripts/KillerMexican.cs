@@ -10,6 +10,7 @@ public class KillerMexican : Mexican {
     }
 
     IEnumerator Shoot() {
+        GetComponent<AudioSource>().Play();
         tag = "Player";
         float temp = GetSpeed();
         SetSpeed(0);
