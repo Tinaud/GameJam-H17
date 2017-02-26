@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TweetScripter : MonoBehaviour {
+public class TweetScripter : MonoBehaviour
+{
 
     private string tweet;
     private int subject;
@@ -15,8 +16,8 @@ public class TweetScripter : MonoBehaviour {
     void PlaySound(int i)
     {
         //Assign random sound from variable
-        /*GetComponent<AudioSource>().clip = otherClip[i];
-        GetComponent<AudioSource>().Play();*/
+        GetComponent<AudioSource>().clip = otherClip[i];
+        GetComponent<AudioSource>().Play();
     }
 
     IEnumerator SpawnTweet()
@@ -26,7 +27,7 @@ public class TweetScripter : MonoBehaviour {
         while (Camera.main.GetComponent<GameManager>().IsGameStarted())
         {
             yield return new WaitForSeconds(1);
-            if(Random.Range(0,10) == 3)
+            if (Random.Range(0, 10) == 3)
             {
                 tweetWindow.SetActive(true);
                 int numTweet = 0;
@@ -77,14 +78,17 @@ public class TweetScripter : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         tweetWindow = Instantiate(Resources.Load("TweetBackground", typeof(GameObject))) as GameObject;
+        tweetWindow.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + (4.2f));
         tweet = "";
         subject = 0;
         tweetWindow.SetActive(false);
         tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
         StartCoroutine(SpawnTweet());
+        tweetWindow.transform.parent = gameObject.transform;
 
         tweetQuotes[10] = "Make America great again!";
         tweetQuotes[11] = "Big interview tonight at Fox News";
@@ -99,7 +103,7 @@ public class TweetScripter : MonoBehaviour {
 
         tweetQuotes[30] = "Illegal immigrants are stealing our jobs! We need more men \nto build that wall.";
         tweetQuotes[31] = "The problem with mexican people is that they don't know how \nto make tacos.";
-        tweetQuotes[32] = "Send the mexicans back in to their cage  !";  
+        tweetQuotes[32] = "Send the mexicans back in to their cage  !";
         tweetQuotes[33] = "''Immigrants are Trump's ennemies'', FAKE NEWS! They are \nAMERICA'S ennemies !";
 
         tweetQuotes[40] = "The U.S. military are doing a great job at the mexican border!";
@@ -110,5 +114,10 @@ public class TweetScripter : MonoBehaviour {
         tweetQuotes[50] = "The General of 'the operation illegal immigrant' is an incapable";
         tweetQuotes[51] = "Come on troups! get rid of those mexicans!";
         tweetQuotes[52] = "My grandmother could be more efficient than the custom officers";
+    }
+
+    void update()
+    {
+        tweetWindow.transform.position = new Vector3(gameObject.transform.position.x , gameObject.transform.position.y + (4.2f));
     }
 }

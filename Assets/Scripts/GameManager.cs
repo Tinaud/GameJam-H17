@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     private int freeMexicans,
                 workingMexicans,
                 selectedSoldier;
+    private static int nbSoldiers = 5;
     public List<GameObject> armyGuyList = new List<GameObject>();
 
     void Awake() {
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour {
         workingMexicans = 0;
         selectedSoldier = 0;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < nbSoldiers; i++) {
             int type = Random.Range(0, 3);
             string toSpawn;
 
@@ -63,6 +64,11 @@ public class GameManager : MonoBehaviour {
         return freeMexicans;
     }
 
+    public static void SetNbSoldiers(int soldiers)
+    {
+        nbSoldiers = soldiers;
+    }
+
     public void EndGame(bool goodEnding) {
         gameStarted = false;
 
@@ -75,6 +81,7 @@ public class GameManager : MonoBehaviour {
     public void ChangeSelectedSoldier(int i) {
         armyGuyList[selectedSoldier].GetComponent<PlayerController>().enabled = false;
         armyGuyList[selectedSoldier].GetComponent<ArmyGuy>().enabled = true;
+        armyGuyList[selectedSoldier].gameObject.tag = "ArmyGuy";
 
         selectedSoldier += i;
 
@@ -85,6 +92,7 @@ public class GameManager : MonoBehaviour {
 
         armyGuyList[selectedSoldier].GetComponent<PlayerController>().enabled = true;
         armyGuyList[selectedSoldier].GetComponent<ArmyGuy>().enabled = false;
+        armyGuyList[selectedSoldier].gameObject.tag = "Player";
         transform.position = armyGuyList[selectedSoldier].transform.position + new Vector3(0, 0, -10);
         transform.parent = armyGuyList[selectedSoldier].transform;
     }
