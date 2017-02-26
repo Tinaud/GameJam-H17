@@ -102,7 +102,7 @@ public class ArmyGuy : MonoBehaviour {
     void Flip(Vector2 dir) {
         if (dir.x < 0) {
             GetComponent<SpriteRenderer>().flipX = true;
-            transform.localScale = new Vector3(-1.5f, 1.5f, 0);
+            transform.localScale = new Vector3(1.5f, 1.5f, 0);
             lookDirection = -1;
         }
             
