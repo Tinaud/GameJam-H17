@@ -45,11 +45,8 @@ public class PlayerController : MonoBehaviour {
                     b.GetComponent<BulletCollider>().SetDirection(lookDirection);
                     break;
                 case 2:
-                    GetComponent<Animator>().SetBool("isHitting", true);
-                    if(closeMexican != null)
-                        StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
-                    if (closeSoldier != null)
-                        StartCoroutine(closeSoldier.GetComponent<ArmyGuy>().Stun());
+                    StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
+                    StartCoroutine(Hit());
                     break;
                 default:
                     GetComponent<Animator>().SetBool("isGrabbing", true);
@@ -101,6 +98,13 @@ public class PlayerController : MonoBehaviour {
         if (other.tag == "ArmyGuy")
             closeSoldier = other.gameObject;
         }
+
+    IEnumerator Hit() {
+        GetComponent<Animator>().SetBool("isHitting", true);
+        yield return new WaitForSeconds(0.3f);
+
+        GetComponent<Animator>().SetBool("isHitting", false);
+    }
 
     IEnumerator Grab() {
         yield return new WaitForSeconds(0.1f);
