@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class KillerMexican : Mexican {
 
-    private GameObject soldierToKill;
+    private GameObject soldierInSight;
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag == "ArmyGuy" && other.gameObject.GetComponent<PlayerController>().armyType != 2) {
-            soldierToKill = other.gameObject;
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "ArmyGuy" && other.GetComponent<PlayerController>().armyType != 2) {
+            soldierInSight = other.gameObject;
             StartCoroutine(Shoot());
         }
     }
@@ -17,13 +17,15 @@ public class KillerMexican : Mexican {
         float temp = moveSpeed;
         moveSpeed = 0;
         GetComponent<Animator>().SetBool("isShooting", true);
-        yield return new WaitForSeconds(Random.Range(0.3f, 0.7f));
-        moveSpeed = temp;
-        GetComponent<Animator>().SetBool("isShooting", false);
+        yield return new WaitForSeconds(Random.Range(0.3f, 0.5f));
         
-        if(soldierToKill != null && soldierToKill.GetComponent<PlayerController>().enabled)
-            Camera.main.GetComponent<GameManager>().ChangeSelectedSoldier(1);
-        Destroy(soldierToKill);
-        soldierToKill = null;
+        for(int i = 0; i < 3; i++) {
+            Instantiate(Resources.Load("Bullet"), transform.position + new Vector3(0.5f, -0.1f, 0), Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        moveSpeed = temp;
+
+        GetComponent<Animator>().SetBool("isShooting", false);
     }
 }

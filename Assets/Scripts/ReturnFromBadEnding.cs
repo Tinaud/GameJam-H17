@@ -5,7 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ReturnFromBadEnding : MonoBehaviour {
 
-	public void Back()
+    
+
+    private void Start()
+    {
+        
+    }
+
+    public void Back()
     {
         SceneManager.LoadScene("Main Menu");
     }

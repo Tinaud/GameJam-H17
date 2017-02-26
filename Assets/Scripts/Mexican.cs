@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class Mexican : MonoBehaviour {
 
-    private enum States { run, shoot, flee };
     private float wallHeight;
     public float moveSpeed;
     private GameObject objectiveLocation;
-    private States actualState;
     public List<GameObject> closeEnemies = new List<GameObject>();
     private bool tryAvoidWall;
 
 	void Start () {
         moveSpeed = Random.Range(3.5f, 5.5f);
-        actualState = States.run;
         objectiveLocation = GameObject.Find("EndZone");
         tryAvoidWall = false;
 	}
@@ -26,16 +23,11 @@ public class Mexican : MonoBehaviour {
     Vector2 GetDirection() {
         Vector2 direction = Vector2.zero;
 
-        switch (actualState) {
-            case States.run:
-                direction = 2 * Seek(objectiveLocation.transform.position) + Flee();
+        direction = 2 * Seek(objectiveLocation.transform.position) + Flee();
 
-                if (tryAvoidWall)
-                    direction += (WallAvoidance());
+        if (tryAvoidWall)
+            direction += (WallAvoidance());
 
-                break;
-        }
-        
         return direction.normalized;
     }
 

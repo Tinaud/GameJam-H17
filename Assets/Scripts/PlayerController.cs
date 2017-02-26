@@ -47,8 +47,10 @@ public class PlayerController : MonoBehaviour {
                     StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
                     break;
                 default:
+                    GetComponent<Animator>().SetBool("isGrabbing", true);
                     Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
                     Destroy(closeMexican.gameObject);
+                    GetComponent<Animator>().SetBool("isGrabbing", false);
                     break;
             }
         }
