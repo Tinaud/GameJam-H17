@@ -22,13 +22,18 @@ public class QuotesSpawn : MonoBehaviour
         quoteList[3] = "   Regardez \n les courrir!";
         quoteList[4] = "Vive les \nÉtats-Unis d'Amérique!";
 
-        quoteList[10] = "Sauvez mes tacos!";
-        quoteList[11] = "J'ai des enfants!";
-        quoteList[12] = "J'ai besoin d'un travail!";
-        quoteList[13] = "Je veux manger chez Taco Bell!";
-        quoteList[14] = "Ça fait des heures que je marche!";
+        quoteList[10] = "  Sauvez \nmes tacos!";
+        quoteList[11] = "  J'ai des \nenfants!";
+        quoteList[12] = " J'ai besoin \nd'un travail!";
+        quoteList[13] = "  Je veux \nmanger chez \nTaco Bell!";
+        quoteList[14] = "  Ça fait \ndes heures \nque je marche!";
         quoteList[15] = "GUACAMOLE!";
 
+    }
+
+    void Update()
+    {
+        bubbleWindow.transform.position = new Vector3(gameObject.transform.position.x+(1.5f),gameObject.transform.position.y+(1.5f));
     }
 
     IEnumerator spawnBubble()
