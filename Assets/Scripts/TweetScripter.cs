@@ -9,12 +9,11 @@ public class TweetScripter : MonoBehaviour {
     private GameObject tweetWindow;
     private string[] tweetQuotes = new string[100];
 
-    public AudioClip[] otherClip; //make an arrayed variable (so you can attach more than one sound)
+    public AudioClip[] otherClip;
+    private AudioClip[] tweetaudio = new AudioClip[60];
 
-    // Play random sound from variable
     void PlaySound(int i)
     {
-        //Assign random sound from variable
         GetComponent<AudioSource>().clip = otherClip[i];
         GetComponent<AudioSource>().Play();
     }
@@ -84,7 +83,18 @@ public class TweetScripter : MonoBehaviour {
         subject = 0;
         tweetWindow.SetActive(false);
         tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
-        StartCoroutine(SpawnTweet());
+
+
+        //*****************************************************************
+        //AJOUTER LES SOUND CLIP PAR LE CODE PLUTOT QU'UNE VARIABLE PUBLIQUE
+        //*****************************************************************
+
+        //tweetaudio[1] = AssetBundle.LoadFromFile("Audio/Make america great again.wav") as AudioClip;
+        // tweetaudio[1] = Instantiate(Resources.Load("Make america great again", typeof(AudioClip))) as AudioClip;
+        // Texture2D t = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Textures/texture.jpg", typeof(Texture2D));
+        // tweetaudio[1] = Resources.Load("Audio/Make america great again.wav") as AudioClip;
+        GetComponent<AudioSource>().clip = tweetaudio[1];
+        GetComponent<AudioSource>().Play();
 
         tweetQuotes[10] = "Make America great again!";
         tweetQuotes[11] = "Big interview tonight at Fox News";
@@ -110,5 +120,8 @@ public class TweetScripter : MonoBehaviour {
         tweetQuotes[50] = "The General of 'the operation illegal immigrant' is an incapable";
         tweetQuotes[51] = "Come on troups! get rid of those mexicans!";
         tweetQuotes[52] = "My grandmother could be more efficient than the custom officers";
+
+        StartCoroutine(SpawnTweet());
+
     }
 }
