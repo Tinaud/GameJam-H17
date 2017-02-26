@@ -7,26 +7,37 @@ public class UI : MonoBehaviour {
 
     int nbOnWall, nbInCountry;
     float wScale;
-    GameObject nbWall, nbFree, wallBuilt;
+    GameObject nbWall, nbFree, wallBuilt, WALL;
 
 	void Start () {
-        nbOnWall = GetComponent<GameManager>().MexicansOnWall();
-        nbInCountry = GetComponent<GameManager>().MexicansFree();
-        wScale = GetComponent<Wall>().WallScale();
-
+       
+        WALL = GameObject.Find("WALL");
         wallBuilt = GameObject.Find("%");
         nbWall = GameObject.Find("Wnb");
         nbFree = GameObject.Find("Cnb");
 	}
 	
 	void Update () {
-        nbWall.GetComponent<Text>().text = "Number of immigrants" + "\n" + "on the wall:" + nbOnWall.ToString();
-        nbFree.GetComponent<Text>().text = "Number of immigrants" + "\n" + "in the Country:" + nbInCountry.ToString();
-        wallBuilt.GetComponent<Text>().text = "Wall built:" + Pourcentage(wScale).ToString() + "%";
+
+        nbOnWall = GetComponent<GameManager>().MexicansOnWall();
+        nbInCountry = GetComponent<GameManager>().MexicansFree();
+        wScale = WALL.GetComponent<Wall>().WallScale();
+
+        nbWall.GetComponent<Text>().text = nbOnWall.ToString();
+        nbFree.GetComponent<Text>().text = nbInCountry.ToString();
+        
+        if(Pourcentage(wScale) >= 100.0f)
+        {
+            wallBuilt.GetComponent<Text>().text = "Wall built: 100%";
+        }
+        else
+        {
+            wallBuilt.GetComponent<Text>().text = "Wall built:" + Pourcentage(wScale).ToString() + "%";
+        }
 	}
 
-    public float Pourcentage(float wScale)
+    public int Pourcentage(float wScale)
     {
-        return (wScale / 19.15f) * 100.0f;
+        return (int)(((wScale / 19.15f) * 100.0f) - 7);
     }
 }
