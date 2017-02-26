@@ -15,4 +15,9 @@ public class Wall : MonoBehaviour {
         if (transform.localScale.y >= 20.65f)
             gm.EndGame(false);
 	}
+
+    public float WallScale()
+    {
+        return transform.localScale.y;
+    }
 }
