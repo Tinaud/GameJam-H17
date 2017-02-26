@@ -84,7 +84,7 @@ public class TweetScripter : MonoBehaviour {
 
         tweetQuotes[10] = "Make America great again!";
         tweetQuotes[11] = "Big interview tonight at Fox News";
-        tweetQuotes[12] = "www.pornhub.com/trump\nDon't botter the last tweet! i thought i was on google.";
+        tweetQuotes[12] = "www.p*rnhu8.com/trump\nDon't botter the last tweet! i thought i was on google.";
         tweetQuotes[13] = "Screw the other countries...";
 
         tweetQuotes[20] = "Grab them by the pu**y!";
@@ -94,9 +94,9 @@ public class TweetScripter : MonoBehaviour {
         tweetQuotes[24] = "Must be a pretty picture mexican's women dropping on their knees";
 
         tweetQuotes[30] = "Illegal immigrants are stealing our jobs! We need more men \nto build that wall.";
-        tweetQuotes[31] = "The problem with mexican men is that they don't know how \nto make tacos.";
-        tweetQuotes[32] = "We are going to intercept every mexican male and send them\nback to their dumb country!";
-        tweetQuotes[33] = "''Mexicans are Trump's ennemies'', FAKE NEWS! They are \nAMERICA'S ennemies!";
+        tweetQuotes[31] = "The problem with mexican people is that they don't know how \nto make tacos.";
+        tweetQuotes[32] = "Send the mexicans back in to their cage  !";  
+        tweetQuotes[33] = "''Immigrants are Trump's ennemies'', FAKE NEWS! They are \nAMERICA'S ennemies !";
 
         tweetQuotes[40] = "The U.S. military are doing a great job at the mexican border!";
         tweetQuotes[41] = "We are intercepting a lot of illegal mexican immigrants";
