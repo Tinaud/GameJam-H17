@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     private int freeMexicans,
                 workingMexicans,
                 selectedSoldier;
+    private static int nbSoldiers = 5;
     public List<GameObject> armyGuyList = new List<GameObject>();
 
     void Awake() {
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour {
         workingMexicans = 0;
         selectedSoldier = 0;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < nbSoldiers; i++) {
             int type = Random.Range(0, 3);
             string toSpawn;
 
@@ -61,6 +62,11 @@ public class GameManager : MonoBehaviour {
 
     public int MexicansFree() {
         return freeMexicans;
+    }
+
+    public static void SetNbSoldiers(int soldiers)
+    {
+        nbSoldiers = soldiers;
     }
 
     public void EndGame(bool goodEnding) {
