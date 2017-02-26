@@ -54,16 +54,15 @@ public class PlayerController : MonoBehaviour {
                     foreach (GameObject g in closeSoldiers) {
                         StartCoroutine(g.GetComponent<ArmyGuy>().Stun());
                     }
-
                     break;
                 default:
-                    GetComponent<Animator>().SetBool("isGrabbing", true);
                     StartCoroutine(Grab());
                     if(closeMexicans.Count != 0) {
                         Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
-                        Destroy(closeMexicans[0].gameObject);
+                        GameObject temp = closeMexicans[0].gameObject;
+                        closeMexicans.RemoveAt(0);
+                        Destroy(temp);
                     }
-                    
                     break;
             }
         }
@@ -115,7 +114,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     IEnumerator Grab() {
-        yield return new WaitForSeconds(0.1f);
+        GetComponent<Animator>().SetBool("isGrabbing", true);
+        yield return new WaitForSeconds(0.2f);
         GetComponent<Animator>().SetBool("isGrabbing", false);
     }
 }
