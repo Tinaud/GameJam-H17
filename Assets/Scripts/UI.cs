@@ -38,6 +38,6 @@ public class UI : MonoBehaviour {
 
     public int Pourcentage(float wScale)
     {
-        return (int)(((wScale / 19.15f) * 100.0f) - 7);
+        return (int)(((wScale / 19.15f) * 100.0f) - 14);
     }
 }
