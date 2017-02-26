@@ -151,4 +151,11 @@ public class ArmyGuy : MonoBehaviour {
 
         GetComponent<Animator>().SetBool("isHitting", false);
     }
+
+    public IEnumerator Stun() {
+        float temp = moveSpeed;
+        moveSpeed = 0;
+        yield return new WaitForSeconds(2f);
+        moveSpeed = temp;
+    }
 }

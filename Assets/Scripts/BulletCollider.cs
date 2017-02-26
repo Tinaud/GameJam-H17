@@ -20,8 +20,14 @@ public class BulletCollider : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Mexican" || other.gameObject.tag == "ArmyGuy") {
+        if (other.gameObject.tag == "Mexican") {
             Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+
+        if(other.gameObject.tag == "ArmyGuy") {
+            if (other.gameObject.GetComponent<ArmyGuy>().armyType != 2)
+                Destroy(other.gameObject);
             Destroy(gameObject);
         }
 

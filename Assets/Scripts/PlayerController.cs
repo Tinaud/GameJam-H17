@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour {
     public int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
     private float moveSpeed, horizontalSpeed, verticalSpeed;
     private bool action, mexicanTrigger;
-    private GameObject closeMexican;
+    private GameObject closeMexican,
+                       closeSoldier;
     private int lookDirection;
 
     // Use this for initialization
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour {
                     GetComponent<Animator>().SetBool("isHitting", true);
                     if(closeMexican != null)
                         StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
+                    if (closeSoldier != null)
+                        StartCoroutine(closeSoldier.GetComponent<ArmyGuy>().Stun());
                     break;
                 default:
                     GetComponent<Animator>().SetBool("isGrabbing", true);
@@ -86,18 +89,18 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Mexican")
-        {
             closeMexican = other.gameObject;
-        }
+        if (other.tag == "ArmyGuy")
+            closeSoldier = other.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Mexican")
-        {
+        if (other.tag == "Mexican" || other.tag == "ArmyGuy")
             closeMexican = null;
+        if (other.tag == "ArmyGuy")
+            closeSoldier = other.gameObject;
         }
-    }
 
     IEnumerator Grab() {
         yield return new WaitForSeconds(0.1f);
