@@ -25,15 +25,22 @@ public class BulletCollider : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if(other.gameObject.tag == "ArmyGuy" || other.gameObject.tag == "Player") {
-            if (other.gameObject.GetComponent<ArmyGuy>().armyType != 2) {
+        if(other.gameObject.tag == "ArmyGuy") {
+            if (other.gameObject.GetComponent<ArmyGuy>().armyType != 2) 
+                Destroy(other.gameObject);
+
+            Destroy(gameObject);
+        }
+
+        if (other.gameObject.tag == "Player") {
+            if (other.gameObject.GetComponent<PlayerController>().armyType != 2) {
                 Camera.main.GetComponent<GameManager>().ChangeSelectedSoldier(1);
                 Destroy(other.gameObject);
             }
             Destroy(gameObject);
         }
 
-        if(other.gameObject.tag == "Wall") {
+        if (other.gameObject.tag == "Wall") {
             Destroy(gameObject);
         }
     }
