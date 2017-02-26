@@ -7,11 +7,14 @@ public class BulletCollider : MonoBehaviour {
     private float speed;
 
     void Start() {
-        speed = 4.0f;
         StartCoroutine(BulletLife());
     }
     void Update() {
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+    }
+
+    public void SetDirection(int d) {
+        speed = 4.0f * d;
     }
 
     void OnCollisionEnter2D(Collision2D other)
