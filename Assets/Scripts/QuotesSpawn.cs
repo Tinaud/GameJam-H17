@@ -13,6 +13,7 @@ public class QuotesSpawn : MonoBehaviour
     {
         bubbleWindow = Instantiate(Resources.Load("QuoteBubble", typeof(GameObject))) as GameObject;
         bubbleWindow.transform.parent = gameObject.transform;
+        bubbleWindow.transform.position = new Vector3(gameObject.transform.position.x + (1.5f), gameObject.transform.position.y + (1.5f));
 
         StartCoroutine(spawnBubble());
         bubbleWindow.SetActive(false);
@@ -29,11 +30,6 @@ public class QuotesSpawn : MonoBehaviour
         quoteList[14] = "  Ça fait \ndes heures \nque je marche!";
         quoteList[15] = "GUACAMOLE!";
 
-    }
-
-    void Update()
-    {
-        bubbleWindow.transform.position = new Vector3(gameObject.transform.position.x+(1.5f),gameObject.transform.position.y+(1.5f));
     }
 
     IEnumerator spawnBubble()
