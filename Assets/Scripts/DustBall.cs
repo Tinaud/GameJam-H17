@@ -19,7 +19,7 @@ public class DustBall : MonoBehaviour {
     }
     
     IEnumerator DestroyBall() {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 }
