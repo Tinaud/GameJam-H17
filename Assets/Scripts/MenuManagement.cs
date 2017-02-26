@@ -8,7 +8,7 @@ public class MenuManagement: MonoBehaviour {
 
     private bool gameStarted;
     public List<GameObject> armyGuyList = new List<GameObject>();
-    private GameObject _Options, _Menu, _Credits, _Mexican;
+    private GameObject _Options, _Menu, _Credits, _Mexican, _Tutorial;
 
     private void Start()
     {
@@ -26,10 +26,12 @@ public class MenuManagement: MonoBehaviour {
             _Options = GameObject.Find("Options");
             _Menu = GameObject.Find("Menu");
             _Credits = GameObject.Find("Credits");
+            _Tutorial = GameObject.Find("Tutorial");
 
             _Options.SetActive(false);
             _Menu.SetActive(true);
             _Credits.SetActive(false);
+            _Tutorial.SetActive(false);
         }
     }
 
@@ -38,6 +40,7 @@ public class MenuManagement: MonoBehaviour {
         _Options.SetActive(false);
         _Menu.SetActive(true);
         _Credits.SetActive(false);
+        _Tutorial.SetActive(false);
     }
 
     public void Options()
@@ -45,6 +48,7 @@ public class MenuManagement: MonoBehaviour {
         _Options.SetActive(true);
         _Menu.SetActive(false);
         _Credits.SetActive(false);
+        _Tutorial.SetActive(false);
     }
 
     public void Credits()
@@ -52,6 +56,15 @@ public class MenuManagement: MonoBehaviour {
         _Options.SetActive(false);
         _Menu.SetActive(false);
         _Credits.SetActive(true);
+        _Tutorial.SetActive(false);
+    }
+
+    public void Tutorial()
+    {
+        _Options.SetActive(false);
+        _Menu.SetActive(false);
+        _Credits.SetActive(false);
+        _Tutorial.SetActive(true);
     }
 
     public void Play()
