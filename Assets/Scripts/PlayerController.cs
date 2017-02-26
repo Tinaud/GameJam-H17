@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour {
     private float moveSpeed, horizontalSpeed, verticalSpeed;
     private bool action, mexicanTrigger;
     private GameObject closeMexican;
+    private int lookDirection;
 
     // Use this for initialization
     void Start () {
         moveSpeed = 5f;
+        lookDirection = 1;
 	}
 
     // Update is called once per frame
@@ -23,10 +25,7 @@ public class PlayerController : MonoBehaviour {
         if (Mathf.Abs(horizontalSpeed) > 0.05f) {
             transform.Translate(Vector3.right * horizontalSpeed * moveSpeed * Time.deltaTime);
 
-            if (horizontalSpeed < 0)
-                GetComponent<SpriteRenderer>().flipX = true;
-            else
-                GetComponent<SpriteRenderer>().flipX = false;
+            Flip(horizontalSpeed);     
         }
 
         if (Mathf.Abs(verticalSpeed) > 0.05)
@@ -38,19 +37,25 @@ public class PlayerController : MonoBehaviour {
         else
             GetComponent<Animator>().SetBool("isIdle", false);
 
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) && closeMexican != null) {
+        if (Input.GetKeyDown(KeyCode.JoystickButton0)) {
             switch (armyType) {
                 case 1:
-                    Destroy(closeMexican.gameObject);
+                    GameObject b = (GameObject)Instantiate(Resources.Load("Bullet"), transform.position + new Vector3(lookDirection * 0.5f, -0.1f, 0), Quaternion.identity);
+                    b.GetComponent<BulletCollider>().SetDirection(lookDirection);
                     break;
                 case 2:
-                    StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
+                    GetComponent<Animator>().SetBool("isHitting", true);
+                    if(closeMexican != null)
+                        StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
                     break;
                 default:
                     GetComponent<Animator>().SetBool("isGrabbing", true);
-                    Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
-                    Destroy(closeMexican.gameObject);
-                    GetComponent<Animator>().SetBool("isGrabbing", false);
+                    StartCoroutine(Grab());
+                    if(closeMexican != null) {
+                        Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                        Destroy(closeMexican.gameObject);
+                    }
+                    
                     break;
             }
         }
@@ -63,6 +68,18 @@ public class PlayerController : MonoBehaviour {
         //Changement de soldat à droite
         if(Input.GetKeyDown(KeyCode.JoystickButton5)) {
             Camera.main.GetComponent<GameManager>().ChangeSelectedSoldier(1);
+        }
+    }
+
+    void Flip(float dir) {
+        if (dir < 0) {
+            GetComponent<SpriteRenderer>().flipX = true;
+            lookDirection = -1;
+        }
+
+        else {
+            GetComponent<SpriteRenderer>().flipX = false;
+            lookDirection = 1;
         }
     }
 
@@ -80,6 +97,11 @@ public class PlayerController : MonoBehaviour {
         {
             closeMexican = null;
         }
+    }
+
+    IEnumerator Grab() {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<Animator>().SetBool("isGrabbing", false);
     }
 }
 
