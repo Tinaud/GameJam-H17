@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class BadEndingTrump : MonoBehaviour {
 
-    private GameObject sprite;
+    GameObject unTrump, CurrentTrump;
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(Delete());
-	}
-	
-	IEnumerator Delete()
+        unTrump = GameObject.Find("Trump playable");
+        CurrentTrump = Instantiate(unTrump, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    private void Update()
     {
-        yield return new WaitForSeconds(10.0f);
-        Destroy(gameObject);
+        
     }
 }
