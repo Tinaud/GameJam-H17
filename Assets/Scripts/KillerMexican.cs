@@ -16,6 +16,7 @@ public class KillerMexican : Mexican {
     IEnumerator Shoot() {
         float temp = GetSpeed();
         SetSpeed(0);
+        Debug.Log("hello");
         GetComponent<Animator>().SetBool("isShooting", true);
         
         for(int i = 0; i < 3; i++) {
