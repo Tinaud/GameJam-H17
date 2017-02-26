@@ -67,9 +67,11 @@ public class Mexican : MonoBehaviour {
     }
 
     public IEnumerator Stun() {
+        GameObject tacos = (GameObject)Instantiate(Resources.Load("StunEffect"), transform.position + new Vector3(0, 1.0f, 0), Quaternion.identity);
         float temp = moveSpeed;
         moveSpeed = 0;
         yield return new WaitForSeconds(2f);
+        Destroy(tacos.gameObject);
         moveSpeed = temp;
     }
 }

@@ -50,14 +50,16 @@ public class ArmyGuy : MonoBehaviour {
                             StartCoroutine(Shoot());
                             break;
                         case 2:
-                            GetComponent<Animator>().SetBool("isHitting", true);
                             StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
+                            StartCoroutine(Hit());
                             break;
                         default:
                             GetComponent<Animator>().SetBool("isGrabbing", true);
-                            Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
-                            Destroy(closeMexican.gameObject);
-                            GetComponent<Animator>().SetBool("isGrabbing", false);
+                            StartCoroutine(Grab());
+                            if (closeMexican != null) {
+                                Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
+                                Destroy(closeMexican.gameObject);
+                            }
                             break;
                     }
                 actualState = States.wander;
@@ -152,9 +154,16 @@ public class ArmyGuy : MonoBehaviour {
     }
 
     public IEnumerator Stun() {
+        GameObject tacos = (GameObject)Instantiate(Resources.Load("StunEffect"), transform.position + new Vector3(0, 1.0f, 0), Quaternion.identity);
         float temp = moveSpeed;
         moveSpeed = 0;
         yield return new WaitForSeconds(2f);
+        Destroy(tacos.gameObject);
         moveSpeed = temp;
+    }
+
+    IEnumerator Grab() {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<Animator>().SetBool("isGrabbing", false);
     }
 }
