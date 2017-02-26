@@ -64,7 +64,7 @@ public class TweetScripter : MonoBehaviour
                 }
 
                 tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
-                PlaySound(numTweet);
+                //PlaySound(numTweet);
                 yield return new WaitForSeconds(15);
                 tweetWindow.SetActive(false);
                 tweetWindow.GetComponentInChildren<TextMesh>().text = "";
