@@ -16,7 +16,7 @@ public class KillZone : MonoBehaviour {
             if (gm.IsGameStarted())
                 gm.AddMexicanFree();
 
-            if (gm.MexicansFree() > 50)
+            if (gm.MexicansFree() >= 50)
                 gm.EndGame(true);
         }
     }
