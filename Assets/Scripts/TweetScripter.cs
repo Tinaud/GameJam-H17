@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class TweetScripter : MonoBehaviour {
 
-    public int frequencyTweet;
-    public float startTweetWait;
-    public float afterTweetWait;
     private string tweet;
     private int subject;
-    public TextMesh tweetText;
-    public GameObject tweetWindow;
-
+    private GameObject tweetWindow;
     private string[] tweetQuotes = new string[100];
 
     IEnumerator SpawnTweet()
     {
-        yield return new WaitForSeconds(startTweetWait);
+        yield return new WaitForSeconds(3);
 
         while (Camera.main.GetComponent<GameManager>().IsGameStarted())
         {
-            yield return new WaitForSeconds(frequencyTweet);
+            yield return new WaitForSeconds(1);
             if(Random.Range(0,10) == 3)
             {
                 tweetWindow.SetActive(true);
@@ -52,10 +47,10 @@ public class TweetScripter : MonoBehaviour {
                         break;
                 }
 
-                tweetText.text = tweet;
-                yield return new WaitForSeconds(afterTweetWait);
+                tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
+                yield return new WaitForSeconds(15);
                 tweetWindow.SetActive(false);
-                tweetText.text = "";
+                tweetWindow.GetComponentInChildren<TextMesh>().text = "";
             }
         }
     }
@@ -68,10 +63,11 @@ public class TweetScripter : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        tweetWindow = Instantiate(Resources.Load("TweetBackground", typeof(GameObject))) as GameObject;
         tweet = "";
         subject = 0;
         tweetWindow.SetActive(false);
-        tweetText.text = tweet;
+        tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
         StartCoroutine(SpawnTweet());
 
         tweetQuotes[10] = "Make America great again!";

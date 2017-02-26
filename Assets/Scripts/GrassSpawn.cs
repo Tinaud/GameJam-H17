@@ -14,7 +14,7 @@ public class GrassSpawn : MonoBehaviour {
 
     Vector3 RandomSpawnPos()
     {
-        return new Vector3(transform.position.x, transform.position.y + Random.Range(-18.0f, 18.0f), 0);
+        return new Vector3(Random.Range(-25.0f, -10.0f), Random.Range(-18.0f, 18.0f), 0);
     }
 
     IEnumerator Spawn()

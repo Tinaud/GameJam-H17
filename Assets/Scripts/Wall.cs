@@ -12,7 +12,7 @@ public class Wall : MonoBehaviour {
 	void Update () {
         transform.localScale += new Vector3(0, gm.MexicansOnWall() * 0.0005f, 0);
 
-        if (transform.localScale.y >= 20)
+        if (transform.localScale.y >= 20.65f)
             gm.EndGame(false);
 	}
 }
