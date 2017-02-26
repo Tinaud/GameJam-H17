@@ -7,19 +7,12 @@ using UnityEngine.SceneManagement;
 public class MenuManagement: MonoBehaviour {
 
     private bool gameStarted;
-    private int freeMexicans,
-                workingMexicans,
-                selectedSoldier;
     public List<GameObject> armyGuyList = new List<GameObject>();
     private GameObject _Options, _Menu, _Credits, _Mexican;
 
     private void Start()
     {
         StartCoroutine(Spawn());
-
-        freeMexicans = 0;
-        workingMexicans = 0;
-        selectedSoldier = 0;
 
         for (int i = 0; i < 1; i++)
         {
