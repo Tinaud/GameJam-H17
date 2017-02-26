@@ -9,6 +9,17 @@ public class TweetScripter : MonoBehaviour {
     private GameObject tweetWindow;
     private string[] tweetQuotes = new string[100];
 
+    public AudioClip[] otherClip; //make an arrayed variable (so you can attach more than one sound)
+
+    // Play random sound from variable
+    void PlaySound(int i)
+    {
+        //Assign random sound from variable
+        GetComponent<AudioSource>().clip = otherClip[i];
+
+        GetComponent<AudioSource>().Play();
+    }
+
     IEnumerator SpawnTweet()
     {
         yield return new WaitForSeconds(3);
@@ -48,6 +59,7 @@ public class TweetScripter : MonoBehaviour {
                 }
 
                 tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
+
                 yield return new WaitForSeconds(15);
                 tweetWindow.SetActive(false);
                 tweetWindow.GetComponentInChildren<TextMesh>().text = "";
