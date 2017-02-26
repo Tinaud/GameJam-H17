@@ -17,7 +17,6 @@ public class KillerMexican : Mexican {
         float temp = moveSpeed;
         moveSpeed = 0;
         GetComponent<Animator>().SetBool("isShooting", true);
-        yield return new WaitForSeconds(Random.Range(0.3f, 0.5f));
         
         for(int i = 0; i < 3; i++) {
             Instantiate(Resources.Load("Bullet"), transform.position + new Vector3(0.5f, -0.1f, 0), Quaternion.identity);

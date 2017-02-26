@@ -6,6 +6,7 @@ public class BulletCollider : MonoBehaviour {
 
     private float speed;
 
+
     void Start() {
         StartCoroutine(BulletLife());
     }
@@ -14,23 +15,23 @@ public class BulletCollider : MonoBehaviour {
     }
 
     public void SetDirection(int d) {
-        speed = 4.0f * d;
+        speed = 14.0f * d;
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Mexican") || other.gameObject.CompareTag("ArmyGuy")) {
+        if (other.gameObject.tag == "Mexican" || other.gameObject.tag == "ArmyGuy") {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
 
-        if(other.gameObject.CompareTag("Wall")) {
+        if(other.gameObject.tag == "Wall") {
             Destroy(gameObject);
         }
     }
 
     IEnumerator BulletLife() {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         Destroy(gameObject);
     }
 }

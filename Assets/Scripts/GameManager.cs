@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour {
     public void ChangeSelectedSoldier(int i) {
         armyGuyList[selectedSoldier].GetComponent<PlayerController>().enabled = false;
         armyGuyList[selectedSoldier].GetComponent<ArmyGuy>().enabled = true;
+        armyGuyList[selectedSoldier].gameObject.tag = "ArmyGuy";
 
         selectedSoldier += i;
 
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour {
 
         armyGuyList[selectedSoldier].GetComponent<PlayerController>().enabled = true;
         armyGuyList[selectedSoldier].GetComponent<ArmyGuy>().enabled = false;
+        armyGuyList[selectedSoldier].gameObject.tag = "Player";
         transform.position = armyGuyList[selectedSoldier].transform.position + new Vector3(0, 0, -10);
         transform.parent = armyGuyList[selectedSoldier].transform;
     }

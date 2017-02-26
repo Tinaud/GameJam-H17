@@ -50,7 +50,7 @@ public class ArmyGuy : MonoBehaviour {
                             StartCoroutine(Shoot());
                             break;
                         case 2:
-                            GetComponent<Animator>().SetBool("isGrabbing", true);
+                            GetComponent<Animator>().SetBool("isHitting", true);
                             StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
                             break;
                         default:
@@ -102,13 +102,11 @@ public class ArmyGuy : MonoBehaviour {
     void Flip(Vector2 dir) {
         if (dir.x < 0) {
             GetComponent<SpriteRenderer>().flipX = true;
-            transform.localScale = new Vector3(1.5f, 1.5f, 0);
             lookDirection = -1;
         }
             
         else {
             GetComponent<SpriteRenderer>().flipX = false;
-            transform.localScale = new Vector3(1.5f, 1.5f, 0);
             lookDirection = 1;
         }
             
@@ -131,7 +129,6 @@ public class ArmyGuy : MonoBehaviour {
         float temp = moveSpeed;
         moveSpeed = 0;
         GetComponent<Animator>().SetBool("isShooting", true);
-        yield return new WaitForSeconds(Random.Range(0.3f, 0.5f));
 
         for (int i = 0; i < 3; i++) {
             GameObject b = (GameObject)Instantiate(Resources.Load("Bullet"), transform.position + new Vector3(0.5f, -0.1f, 0), Quaternion.identity);
