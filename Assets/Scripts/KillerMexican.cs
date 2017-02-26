@@ -25,6 +25,6 @@ public class KillerMexican : Mexican {
         SetSpeed(temp);
 
         GetComponent<Animator>().SetBool("isShooting", false);
-        tag = "ArmyGuy";
+        tag = "Mexican";
     }
 }

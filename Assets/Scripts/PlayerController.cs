@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour {
     public int armyType; //0: Normal, 1: Gunner, 2: Riot Shield
     private float moveSpeed, horizontalSpeed, verticalSpeed;
     private bool action, mexicanTrigger;
-    private GameObject closeMexican,
-                       closeSoldier;
+    public List<GameObject> closeMexicans = new List<GameObject>();
+    public List<GameObject> closeSoldiers = new List<GameObject>();
     private int lookDirection;
 
     // Use this for initialization
@@ -45,15 +45,23 @@ public class PlayerController : MonoBehaviour {
                     b.GetComponent<BulletCollider>().SetDirection(lookDirection);
                     break;
                 case 2:
-                    StartCoroutine(closeMexican.GetComponent<Mexican>().Stun());
                     StartCoroutine(Hit());
+
+                    foreach (GameObject g in closeMexicans) {
+                        StartCoroutine(g.GetComponent<Mexican>().Stun());
+                    }
+
+                    foreach (GameObject g in closeSoldiers) {
+                        StartCoroutine(g.GetComponent<ArmyGuy>().Stun());
+                    }
+
                     break;
                 default:
                     GetComponent<Animator>().SetBool("isGrabbing", true);
                     StartCoroutine(Grab());
-                    if(closeMexican != null) {
+                    if(closeMexicans.Count != 0) {
                         Camera.main.GetComponent<GameManager>().AddMexicanOnWall();
-                        Destroy(closeMexican.gameObject);
+                        Destroy(closeMexicans[0].gameObject);
                     }
                     
                     break;
@@ -86,18 +94,18 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Mexican")
-            closeMexican = other.gameObject;
-        if (other.tag == "ArmyGuy")
-            closeSoldier = other.gameObject;
+            closeMexicans.Add(other.gameObject);
+        else if (other.tag == "ArmyGuy")
+            closeSoldiers.Add(other.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Mexican" || other.tag == "ArmyGuy")
-            closeMexican = null;
-        if (other.tag == "ArmyGuy")
-            closeSoldier = other.gameObject;
-        }
+        if (other.tag == "Mexican")
+            closeMexicans.Remove(other.gameObject);
+        else if (other.tag == "ArmyGuy")
+            closeSoldiers.Remove(other.gameObject);
+    }
 
     IEnumerator Hit() {
         GetComponent<Animator>().SetBool("isHitting", true);
