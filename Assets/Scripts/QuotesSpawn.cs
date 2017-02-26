@@ -18,16 +18,16 @@ public class QuotesSpawn : MonoBehaviour
         StartCoroutine(spawnBubble());
         bubbleWindow.SetActive(false);
         quoteList[0] = "    In God \n  with trust!";
-        quoteList[1] = "  Gloire au \nPrésident Trump";
-        quoteList[2] = " Ne les \nlaissez pas \nvoler nos tacos!";
-        quoteList[3] = "   Regardez \n les courrir!";
-        quoteList[4] = "Vive les \nÉtats-Unis d'Amérique!";
+        quoteList[1] = "  Hail \nPresident Trump";
+        quoteList[2] = " Don't let \nthem steal \nmy tacos!";
+        quoteList[3] = "   look \n them running!";
+        quoteList[4] = "For the \nUnited States!";
 
-        quoteList[10] = "  Sauvez \nmes tacos!";
-        quoteList[11] = "  J'ai des \nenfants!";
-        quoteList[12] = " J'ai besoin \nd'un travail!";
-        quoteList[13] = "  Je veux \nmanger chez \nTaco Bell!";
-        quoteList[14] = "  Ça fait \ndes heures \nque je marche!";
+        quoteList[10] = "  Save \nmy tacos!";
+        quoteList[11] = "  I have \nchildrens!";
+        quoteList[12] = " I need \na job!";
+        quoteList[13] = "  I want \nto go to \nTaco Bell!";
+        quoteList[14] = "  I walked \nfor hours!";
         quoteList[15] = "GUACAMOLE!";
 
     }
