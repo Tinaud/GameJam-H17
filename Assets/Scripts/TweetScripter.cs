@@ -9,6 +9,16 @@ public class TweetScripter : MonoBehaviour {
     private GameObject tweetWindow;
     private string[] tweetQuotes = new string[100];
 
+    public AudioClip[] otherClip; //make an arrayed variable (so you can attach more than one sound)
+
+    // Play random sound from variable
+    void PlaySound(int i)
+    {
+        //Assign random sound from variable
+        GetComponent<AudioSource>().clip = otherClip[i];
+        GetComponent<AudioSource>().Play();
+    }
+
     IEnumerator SpawnTweet()
     {
         yield return new WaitForSeconds(3);
@@ -27,27 +37,33 @@ public class TweetScripter : MonoBehaviour {
                 {
                     case 0:
                         numTweet = Random.Range(0, 3);
-                        tweet = tweetQuotes[(numTweet + 10)];
+                        numTweet += 10;
+                        tweet = tweetQuotes[numTweet];
                         break;
                     case 1:
                         numTweet = Random.Range(0, 4);
-                       tweet = tweetQuotes[(numTweet + 20)];
+                        numTweet += 20;
+                        tweet = tweetQuotes[(numTweet)];
                         break;
                     case 2:
                         numTweet = Random.Range(0, 3);
-                        tweet = tweetQuotes[(numTweet + 30)];
+                        numTweet += 30;
+                        tweet = tweetQuotes[(numTweet)];
                         break;
                     case 3:
                         numTweet = Random.Range(0, 3);
-                        tweet = tweetQuotes[(numTweet + 40)];
+                        numTweet += 40;
+                        tweet = tweetQuotes[(numTweet)];
                         break;
                     case 4:
                         numTweet = Random.Range(0, 2);
-                        tweet = tweetQuotes[(numTweet + 50)];
+                        numTweet += 50;
+                        tweet = tweetQuotes[(numTweet)];
                         break;
                 }
 
                 tweetWindow.GetComponentInChildren<TextMesh>().text = tweet;
+                PlaySound(numTweet);
                 yield return new WaitForSeconds(15);
                 tweetWindow.SetActive(false);
                 tweetWindow.GetComponentInChildren<TextMesh>().text = "";

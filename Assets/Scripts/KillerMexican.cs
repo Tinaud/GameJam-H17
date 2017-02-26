@@ -21,7 +21,7 @@ public class KillerMexican : Mexican {
         moveSpeed = temp;
         GetComponent<Animator>().SetBool("isShooting", false);
         
-        if(soldierToKill.GetComponent<PlayerController>().enabled)
+        if(soldierToKill != null && soldierToKill.GetComponent<PlayerController>().enabled)
             Camera.main.GetComponent<GameManager>().ChangeSelectedSoldier(1);
         Destroy(soldierToKill);
         soldierToKill = null;
